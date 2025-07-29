@@ -6,23 +6,24 @@ import { getFirestore } from "firebase/firestore";
 
 // --- Client (User-facing) Firebase Project ---
 const clientConfig = {
-  apiKey: "AIzaSyBME917yWL-BKCRDkc_8hlS_Js3MEeypg4",
-  authDomain: "netflixgpt-3b5bf.firebaseapp.com",
-  projectId: "netflixgpt-3b5bf",
-  storageBucket: "netflixgpt-3b5bf.appspot.com", // FIXED: previously incorrect
-  messagingSenderId: "758562312382",
-  appId: "1:758562312382:web:7c75261a3ca27e0ab1ceef",
+  apiKey: "AIzaSyCddVGkLoHu7aqM7OBknWk86lJUCmoA2Lw",
+  authDomain: "netflix-gpt-85ea6.firebaseapp.com",
+  projectId: "netflix-gpt-85ea6",
+  storageBucket: "netflix-gpt-85ea6.firebasestorage.app",
+  messagingSenderId: "1058173531839",
+  appId: "1:1058173531839:web:f95006f1030e01090b380a",
+  measurementId: "G-HZE85Q3FC5"
 };
 
 // --- Admin Firebase Project ---
 const adminConfig = {
-  apiKey: "AIzaSyBbvENafT4Ey6GKHa_9TWLWFheq-SD4Po4",
-  authDomain: "netflix-admin-a4372.firebaseapp.com",
-  projectId: "netflix-admin-a4372",
-  storageBucket: "netflix-admin-a4372.appspot.com", // FIXED: previously incorrect
-  messagingSenderId: "405967106355",
-  appId: "1:405967106355:web:3baabd0a101da16e7d8e46",
-  measurementId: "G-9WLM0WN76E",
+  apiKey: "AIzaSyDnGzy0ZXamNc1p06INZp_vPLEPzjpBNSw",
+  authDomain: "netflix-admin-6a8a4.firebaseapp.com",
+  projectId: "netflix-admin-6a8a4",
+  storageBucket: "netflix-admin-6a8a4.firebasestorage.app",
+  messagingSenderId: "1072706580304",
+  appId: "1:1072706580304:web:45cbf8aa08b16c95f54655",
+  measurementId: "G-WCWTJQT1L4"
 };
 
 // --- Initialize or retrieve apps ---

@@ -202,8 +202,7 @@ const AddMovies = () => {
               className="w-full mt-6 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200"
             >
               Add Movie
-            </button>
-          </form>
+            </button></form>
         </div>
       </div>
     </div>
