@@ -10,6 +10,7 @@ const AddMovies = () => {
     title: "",
     description: "",
     genre: "",
+    videoUrl: "",
     poster: "",
     rating: "",
     year: "",
@@ -32,6 +33,7 @@ const AddMovies = () => {
         title: "",
         description: "",
         genre: "",
+        videoUrl: "",
         poster: "",
         rating: "",
         year: "",
@@ -135,6 +137,29 @@ const AddMovies = () => {
                 htmlFor="poster"
                 className="block text-sm font-medium text-gray-300"
               >
+                Video URL<span className="text-red-700 px-1 text-md">*</span>
+              </label>
+              <input
+                name="videoUrl"
+                value={input.videoUrl}
+                onChange={(e) =>
+                  setInput((prev) => ({
+                    ...prev,
+                    [e.target.name]: e.target.value,
+                  }))
+                }
+                type="text"
+                required
+                id="poster"
+                className="mt-1 block w-full rounded-md bg-gray-800 border border-gray-600 text-white p-2"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="poster"
+                className="block text-sm font-medium text-gray-300"
+              >
                 Poster URL
               </label>
               <input
@@ -202,7 +227,8 @@ const AddMovies = () => {
               className="w-full mt-6 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200"
             >
               Add Movie
-            </button></form>
+            </button>
+          </form>
         </div>
       </div>
     </div>

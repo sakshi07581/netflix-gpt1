@@ -6,6 +6,7 @@ import Admin from "./Admin";
 import ProtectedAdminRoute from "./ProtectedAdminRoute";
 import AddMovies from "./AddMovies";
 import UserSearch from "./UserSearch";
+import VideoTrailer from "./VideoTrailer";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -36,6 +37,10 @@ const Body = () => {
     {
       path: "/add-movies",
       element: <AddMovies />,
+    },
+    {
+      path: "/video-trailer",
+      element: <VideoTrailer />,
     },
   ]);
 

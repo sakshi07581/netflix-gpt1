@@ -17,37 +17,62 @@ const UserSearch = () => {
 
   const handleUserSearchClick = async () => {
     const rawInput = searchText.current.value.trim();
-    const genreInput = rawInput.toLowerCase(); // fix: match Firestore genre format
+    const g = rawInput.toLowerCase(); // g = user-provided genre input
 
-    if (!genreInput) {
+    if (!g) {
       alert("Please enter a genre to search.");
       return;
     }
 
     try {
       setLoading(true);
-      setResults([]);
 
-      const moviesRef = collection(db, "movies");
-      const q = query(moviesRef, where("genre", "==", genreInput));
-      const snapshot = await getDocs(q);
+      // Step 1: Fetch all documents D from the "movies" collection
+      const D = await getDocs(collection(db, "movies")); // D = set of all movies
 
-      if (snapshot.empty) {
-        alert(`No movies found for genre: ${genreInput}`);
+      // Step 2: Apply the filtering formula:
+      // Result = { d ∈ D | genreofD = g }
+      const Result = [];
+
+      D.forEach((doc) => {
+        const d = { id: doc.id, ...doc.data() }; // d ∈ D
+        const genreOfD = d.genre?.toLowerCase(); // genreofD
+
+        if (genreOfD === g) {
+          Result.push(d); // if genre(d) = g, include in Result
+        }
+      });
+
+      // Step 3: Display the filtered result
+      if (Result.length === 0) {
+        alert(`No movies found for genre: ${g}`);
         return;
       }
 
-      const movieResults = [];
-      snapshot.forEach((doc) => {
-        movieResults.push({ id: doc.id, ...doc.data() });
-      });
-
-      setResults(movieResults);
+      setResults(Result);
     } catch (err) {
       console.error("Movie search error:", err);
       alert("Something went wrong while searching.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleCardClick = (watchUrl) => {
+    // Convert YouTube watch URL to embed URL
+    const convertToEmbedUrl = (url) => {
+      const match = url.match(/v=([^&]+)/);
+      return match
+        ? `https://www.youtube.com/embed/${match[1]}?autoplay=1`
+        : null;
+    };
+
+    const embedUrl = convertToEmbedUrl(watchUrl);
+
+    if (embedUrl) {
+      navigate("/video-trailer", { state: { videoUrl: embedUrl } });
+    } else {
+      alert("Invalid YouTube URL");
     }
   };
 
@@ -92,7 +117,7 @@ const UserSearch = () => {
         {loading && <p className="text-center text-gray-400">Searching...</p>}
 
         {!loading && results.length > 0 && (
-          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 cursor-pointer">
             {results.map((movie) => (
               <div
                 key={movie.id}
@@ -120,6 +145,12 @@ const UserSearch = () => {
                 <p className="text-sm">
                   <strong>Year:</strong> {movie.year || "N/A"}
                 </p>
+                <button
+                  className="px-5 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-md flex items-center gap-2 transition duration-200"
+                  onClick={() => handleCardClick(movie.videoUrl)}
+                >
+                  Watch Video
+                </button>
               </div>
             ))}
           </div>
